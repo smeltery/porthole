@@ -1,0 +1,46 @@
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing semantic version tag
+        required: true
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: release-${{ inputs.tag }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 25
+    env:
+      RELEASE_TAG: ${{ inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Validate tag
+        shell: bash
+        run: '[[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]'
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
+      - name: Build release
+        shell: bash
+        run: |
+          set -euo pipefail
+          export RELEASE_VERSION="${RELEASE_TAG#v}"
+          sed -i '' "s/static let version = .*/static let version = \"$RELEASE_VERSION\"/" Sources/PortholeApp/Version.swift
+          scripts/build-release.sh
+          cd dist
+          shasum -a 256 Porthole-*.zip > SHA256SUMS
+      - name: Publish artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS --clobber
+          else
+            gh release create "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS --verify-tag --generate-notes --title "$RELEASE_TAG"
+          fi

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f7f2">
+<title>Porthole — Out of your way. Still in view.</title>
+<meta name="description" content="See what your coding agents do in the test VM. A live screen, a timeline for every chat, and the context behind every command.">
+<meta property="og:title" content="Porthole — Mac app testing with room to focus">
+<meta property="og:description" content="See what your coding agents do in the test VM. A live screen, a timeline for every chat, and the context behind every command.">
+<meta property="og:type" content="website">
+<link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./layout.css">
+<script src="./demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="shell"><nav aria-label="Primary">
+<a class="brand" href="#top"><img src="./assets/logo.svg" alt="">porthole<span>.</span></a>
+<div class="nav-links"><a href="#why">Why Porthole</a><a href="#together">The family</a><a href="#faq">FAQ</a></div>
+<a class="nav-cta" href="https://github.com/smeltery/porthole">GitHub ↗</a>
+</nav></header>
+<main id="main">
+<section class="hero shell" id="top" aria-labelledby="hero-title">
+<p class="eyebrow">A native window into agent work.</p>
+<h1 id="hero-title">Out of your way.<br><em>Still in view.</em></h1>
+<p class="lead">See what your coding agents do in the test VM. A live screen, a timeline for every chat, and the context behind every command.</p>
+<div class="actions"><a class="button primary" href="#start">Get Porthole <span aria-hidden="true">↗</span></a><a class="button" href="#demo">See the workflow <span aria-hidden="true">↓</span></a></div>
+<p class="fine">Native SwiftUI · macOS 15+ · No accounts</p>
+<div class="demo-stage" id="demo">
+<div class="window">
+<div class="titlebar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="window-title">Porthole / a quieter test session</span></div>
+<div class="workspace"><aside class="sidebar" aria-label="Example session"><p class="label">WORKSPACE</p><div class="side-item active">Live session <span>01</span></div><div class="side-item">Agent chats <span>01</span></div><div class="side-item">App builds <span>01</span></div><br><p class="label">CURRENT TARGET</p><div class="side-item">macOS guest <span>↗</span></div></aside>
+<div class="preview"><div class="preview-head"><strong>Checking the new search field</strong><span class="status">Sample session</span></div>
+<div class="terminal" aria-live="polite" aria-atomic="true"><code id="demo-output"><span class="muted"># Your build. Their desktop.</span>
+<span class="prompt">$</span> slipway open build/Notes.app
+
+Copied Notes.app to the guest
+Launched Notes · window ready
+<span class="muted">Your desktop stays exactly where you left it.</span></code></div>
+<div class="demo-controls" role="group" aria-label="Explore an illustrative session"><button type="button" data-step="launch" aria-pressed="true">01 Launch</button><button type="button" data-step="inspect" aria-pressed="false">02 Inspect</button><button type="button" data-step="observe" aria-pressed="false">03 Observe</button><span class="sample">Illustrative output · no VM connected</span></div>
+</div></div></div>
+</div><div class="caption"><span>BUILT ON YOUR MAC. TESTED ON ITS OWN.</span><span>NO FOCUS STOLEN.</span></div>
+</section>
+<section class="content shell" id="why"><div class="section-head"><div><span class="section-index">01 / A little breathing room</span><h2>Less wondering.<br><em>More context.</em></h2></div><p>An agent says it tested the build. Porthole lets you follow the work: which app it opened, what it clicked, and what came back.</p></div><div class="features"><article class="feature"><span class="number">01 /</span><h3>See the screen live</h3><p>An SSH preview refreshes while you watch. Porthole never clicks, types or takes control.</p></article>
+<article class="feature"><span class="number">02 /</span><h3>Follow the whole session</h3><p>Connect commands to chats, notes, captured output and screenshots. Search across the history.</p></article>
+<article class="feature"><span class="number">03 /</span><h3>Notice when paths cross</h3><p>An overlap warning tells you when multiple sessions share the same target. Coordinate before inputs collide.</p></article></div></section>
+<section class="content shell" id="together"><div class="section-head"><div><span class="section-index">02 / Better together</span><h2>Small tools.<br><em>A shared purpose.</em></h2></div><p>Each tool has its own repository and release. One shared configuration and activity log connect the runner to the observer.</p></div><div class="flow"><a class="flow-item" href="https://smeltery.github.io/harbor/"><img src="./assets/harbor.svg" alt=""><span><strong>Harbor</strong><small>Assemble the workspace</small></span></a> <span class="arrow" aria-hidden="true">→</span> <a class="flow-item" href="https://smeltery.github.io/slipway/"><img src="./assets/slipway.svg" alt=""><span><strong>Slipway</strong><small>Run the test</small></span></a> <span class="arrow" aria-hidden="true">→</span> <a class="flow-item" href="https://smeltery.github.io/porthole/"><img src="./assets/porthole.svg" alt=""><span><strong>Porthole</strong><small>Watch the work</small></span></a></div></section>
+<section class="content shell" id="faq"><div class="section-head"><div><span class="section-index">03 / Good to know</span><h2>A few practical<br><em>details.</em></h2></div><p>Local tools, explicit permissions, and documentation for the parts that matter.</p></div><details><summary>What does Porthole read?</summary><p>Local Slipway logs, captured output and the first prompt from supported agent transcripts. It uses SSH for the live screen and checks GitHub for updates.</p></details>
+<details><summary>Does it control the VM?</summary><p>No. Slipway drives the guest. Porthole only observes it, so opening the monitor cannot launch a VM or send keyboard input.</p></details>
+<details><summary>Are release builds notarized?</summary><p>CI builds are ad-hoc signed and are not notarized. Read the release documentation before opening a download, or build from source with Xcode 26+.</p></details></section>
+<section class="start shell" id="start"><div><span class="section-index">04 / Start here</span><h2>Keep an eye<br><em>on the work.</em></h2><p>Follow the <a href="https://github.com/smeltery/porthole/blob/main/docs/getting-started.md"><u>installation guide</u></a> for requirements and your first session.</p></div><div class="install"><div class="install-head"><span>TERMINAL / GET STARTED</span><button id="copy" type="button">Copy</button></div><pre><code id="install-command">git clone https://github.com/smeltery/porthole.git
+cd porthole
+scripts/build-app.sh</code></pre><p id="copy-status" role="status"></p></div></section>
+</main>
+<footer class="shell"><span>Porthole · Made by Smeltery</span><div class="links"><a href="https://github.com/smeltery/porthole/blob/main/docs/README.md">Documentation</a><a href="https://github.com/smeltery/porthole/releases">Releases</a><a href="https://github.com/smeltery/porthole/blob/main/LICENSE">License</a></div></footer>
+</body></html>

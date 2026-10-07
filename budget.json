@@ -1,0 +1,8 @@
+{
+  "total": 3800,
+  "perFile": 300,
+  "files": {
+    "Sources/PortholeApp/AppUpdater.swift": 440,
+    "Sources/PortholeApp/Styling.swift": 320
+  }
+}
