@@ -7,9 +7,9 @@ let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: size, pixelsHig
   colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
 NSGraphicsContext.saveGraphicsState()
 NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
-NSColor(calibratedRed: 0.94, green: 0.96, blue: 0.91, alpha: 1).setFill()
+NSColor(calibratedRed: 0.96, green: 0.93, blue: 0.98, alpha: 1).setFill()
 NSBezierPath(roundedRect: NSRect(x: 30, y: 30, width: 964, height: 964), xRadius: 220, yRadius: 220).fill()
-let accent = NSColor(calibratedRed: 0.28, green: 0.45, blue: 0.40, alpha: 1)
+let accent = NSColor(calibratedRed: 0.47, green: 0.33, blue: 0.61, alpha: 1)
 accent.setStroke()
 for radius in [330.0, 215.0] {
   let circle = NSBezierPath(ovalIn: NSRect(x: 512-radius, y: 512-radius, width: radius*2, height: radius*2))

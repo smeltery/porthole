@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f7f7f2">
+<meta name="theme-color" content="#faf8fc">
 <title>Porthole — Out of your way. Still in view.</title>
 <meta name="description" content="See what your coding agents do in the test VM. A live screen, a timeline for every chat, and the context behind every command.">
 <meta property="og:title" content="Porthole — Mac app testing with room to focus">
@@ -16,10 +16,16 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="shell"><nav aria-label="Primary">
-<a class="brand" href="#top"><img src="./assets/logo.svg" alt="">porthole<span>.</span></a>
-<div class="nav-links"><a href="#why">Why Porthole</a><a href="#together">The family</a><a href="#faq">FAQ</a></div>
-<a class="nav-cta" href="https://github.com/smeltery/porthole">GitHub ↗</a>
+<header class="shell"><nav class="site-nav" aria-label="Primary">
+<a class="brand" href="#top" aria-label="Porthole home"><img src="./assets/logo.svg" alt="">porthole</a>
+<div class="nav-right">
+<div class="nav-links" id="nav-links">
+<a href="#why">Overview</a><a href="#demo">How it works</a><a href="https://github.com/smeltery/porthole/blob/main/docs/README.md">Documentation</a>
+<a class="github-link" href="https://github.com/smeltery/porthole"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg>GitHub</a>
+</div>
+<a class="nav-cta" href="#start">Get Porthole <span aria-hidden="true">↗</span></a>
+<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+</div>
 </nav></header>
 <main id="main">
 <section class="hero shell" id="top" aria-labelledby="hero-title">
@@ -54,5 +60,20 @@ Launched Notes · window ready
 cd porthole
 scripts/build-app.sh</code></pre><p id="copy-status" role="status"></p></div></section>
 </main>
-<footer class="shell"><span>Porthole · Made by Smeltery</span><div class="links"><a href="https://github.com/smeltery/porthole/blob/main/docs/README.md">Documentation</a><a href="https://github.com/smeltery/porthole/releases">Releases</a><a href="https://github.com/smeltery/porthole/blob/main/LICENSE">License</a></div></footer>
+<footer class="site-footer">
+<div class="shell footer-main">
+<div class="footer-brand"><a class="brand" href="#top"><img src="./assets/logo.svg" alt="">porthole</a><p>Keep a clear view of agent work.</p></div>
+<nav class="footer-links" aria-label="Footer">
+<div class="footer-col"><h2>Product</h2><ul>
+<li><a href="#why">Overview</a></li><li><a href="#demo">The workflow</a></li><li><a href="https://github.com/smeltery/porthole/releases">Releases</a></li><li><a href="#faq">Common questions</a></li>
+</ul></div>
+<div class="footer-col"><h2>Resources</h2><ul>
+<li><a href="https://github.com/smeltery/porthole/blob/main/docs/getting-started.md">Getting started</a></li><li><a href="https://github.com/smeltery/porthole/blob/main/docs/README.md">Documentation</a></li><li><a href="https://github.com/smeltery/porthole/blob/main/docs/development.md">Contributing</a></li><li><a href="https://github.com/smeltery/porthole/issues">Report an issue</a></li>
+</ul></div>
+<div class="footer-col"><h2>The family</h2><ul>
+<li><a href="https://github.com/smeltery/harbor">Harbor</a></li><li><a href="https://github.com/smeltery/slipway">Slipway</a></li><li><a href="https://github.com/smeltery/porthole">Porthole</a></li><li><a href="https://github.com/smeltery">More from Smeltery ↗</a></li>
+</ul></div>
+</nav></div>
+<div class="shell footer-bottom"><span>© 2026 Smeltery</span><div><a href="https://github.com/smeltery/porthole/blob/main/LICENSE">PolyForm Shield 1.0.0</a><a href="https://github.com/smeltery/porthole/blob/main/docs/configuration.md#privacy">Privacy &amp; data</a><a href="#top">Back to top ↑</a></div></div>
+</footer>
 </body></html>
