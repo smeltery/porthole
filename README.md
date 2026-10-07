@@ -1,6 +1,6 @@
 # <img src="assets/logo.svg" width="36" height="36" alt="" /> Porthole
 
-**See what your agents are doing.**
+![Porthole — See what your agents are doing.](assets/og.png)
 
 [![CI](https://github.com/smeltery/porthole/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/porthole/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/smeltery/porthole)](https://github.com/smeltery/porthole/releases)
