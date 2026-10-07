@@ -1,31 +1,59 @@
 import AppKit
 
-// The native icon mirrors assets/logo.svg, rendered at app-icon resolution.
+// Mirror the vector mark on a rounded tile at native app-icon resolution.
 let size = 1024
 let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: size, pixelsHigh: size,
   bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
   colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
+func color(_ hex: UInt32) -> NSColor {
+  NSColor(calibratedRed: CGFloat((hex >> 16) & 255) / 255,
+    green: CGFloat((hex >> 8) & 255) / 255, blue: CGFloat(hex & 255) / 255, alpha: 1)
+}
+func ellipse(_ x: CGFloat, _ y: CGFloat, _ rx: CGFloat, _ ry: CGFloat, _ hex: UInt32) {
+  color(hex).setFill()
+  NSBezierPath(ovalIn: NSRect(x: x-rx, y: y-ry, width: rx*2, height: ry*2)).fill()
+}
+func polygon(_ points: [(CGFloat, CGFloat)], _ hex: UInt32) {
+  let path = NSBezierPath()
+  for (index, point) in points.enumerated() {
+    let position = NSPoint(x: point.0, y: point.1)
+    if index == 0 { path.move(to: position) } else { path.line(to: position) }
+  }
+  path.close()
+  color(hex).setFill()
+  path.fill()
+}
 NSGraphicsContext.saveGraphicsState()
 NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
-NSColor(calibratedRed: 0.96, green: 0.93, blue: 0.98, alpha: 1).setFill()
+color(0xF1E9D8).setFill()
 NSBezierPath(roundedRect: NSRect(x: 30, y: 30, width: 964, height: 964), xRadius: 220, yRadius: 220).fill()
-let accent = NSColor(calibratedRed: 0.47, green: 0.33, blue: 0.61, alpha: 1)
-accent.setStroke()
-for radius in [330.0, 215.0] {
-  let circle = NSBezierPath(ovalIn: NSRect(x: 512-radius, y: 512-radius, width: radius*2, height: radius*2))
-  circle.lineWidth = 45
-  circle.stroke()
-}
+let transform = AffineTransform(translationByX: 128, byY: 896)
+var coordinates = transform
+coordinates.scale(x: 12, y: -12)
+(coordinates as NSAffineTransform).concat()
+ellipse(34, 34, 23, 26, 0x8E592D)
+ellipse(29, 29, 23, 26, 0xEDB84F)
+ellipse(29, 29, 18, 21, 0xCB8D31)
+ellipse(29, 29, 16, 19, 0x294969)
+ellipse(29, 29, 14, 17, 0x9CB8C9)
+NSGraphicsContext.saveGraphicsState()
+NSBezierPath(ovalIn: NSRect(x: 15, y: 12, width: 28, height: 34)).addClip()
 let wave = NSBezierPath()
-wave.move(to: NSPoint(x: 305, y: 485))
-wave.curve(to: NSPoint(x: 720, y: 485), controlPoint1: NSPoint(x: 440, y: 625), controlPoint2: NSPoint(x: 590, y: 345))
-wave.lineWidth = 42
-wave.lineCapStyle = .round
-wave.stroke()
-accent.setFill()
-for point in [(512.0, 790.0), (512.0, 234.0), (234.0, 512.0), (790.0, 512.0)] {
-  NSBezierPath(ovalIn: NSRect(x: point.0-17, y: point.1-17, width: 34, height: 34)).fill()
+wave.move(to: NSPoint(x: 12, y: 31))
+wave.curve(to: NSPoint(x: 29, y: 31), controlPoint1: NSPoint(x: 17.33, y: 25.67), controlPoint2: NSPoint(x: 23, y: 25.67))
+wave.curve(to: NSPoint(x: 46, y: 31), controlPoint1: NSPoint(x: 35, y: 36.33), controlPoint2: NSPoint(x: 40.67, y: 36.33))
+wave.line(to: NSPoint(x: 46, y: 51))
+wave.line(to: NSPoint(x: 12, y: 51))
+wave.close()
+color(0x345873).setFill()
+wave.fill()
+polygon([(19, 14), (24, 12), (19, 27), (14, 29)], 0xF1E9D8)
+NSGraphicsContext.restoreGraphicsState()
+for point in [(29.0, 7.0), (29.0, 51.0), (9.0, 29.0), (49.0, 29.0)] {
+  ellipse(point.0, point.1, 1.7, 1.7, 0x8E592D)
 }
+polygon([(3, 21), (10, 21), (10, 37), (3, 37)], 0xCB8D31)
+polygon([(3, 21), (10, 21), (10, 24), (3, 24)], 0xF1CE79)
 NSGraphicsContext.restoreGraphicsState()
 let destination = CommandLine.arguments.dropFirst().first ?? "assets/logo.png"
 guard let data = bitmap.representation(using: .png, properties: [:]) else {
