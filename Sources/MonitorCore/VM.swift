@@ -5,6 +5,7 @@ public struct VMTarget: Sendable, Equatable {
   public var host: String?
   public var user = "admin"
   public var vmName = "slipway"
+  public var tartExecutable: String?
   public var key: URL
 
   public static func load(home: URL = .homeDirectory) -> VMTarget {
@@ -16,6 +17,7 @@ public struct VMTarget: Sendable, Equatable {
       case "TEST_HOST": target.host = value.isEmpty ? nil : value
       case "TEST_USER": target.user = value
       case "VM": target.vmName = value
+      case "TART": target.tartExecutable = value
       case "KEY": target.key = URL(filePath: value)
       default: break
       }
@@ -67,12 +69,13 @@ public enum VM {
       let result = try? await Shell.run(ssh, sshArguments(target, address: host) + ["true"], timeout: 8)
       return result?.status == 0 ? .running(address: host) : .unreachable
     }
-    guard let list = try? await Shell.run(tart, ["list", "--format", "json"], timeout: 8), list.status == 0,
+    let executable = target.tartExecutable ?? tart
+    guard let list = try? await Shell.run(executable, ["list", "--format", "json"], timeout: 8), list.status == 0,
       let vms = try? JSONSerialization.jsonObject(with: list.stdout) as? [[String: Any]],
       let vm = vms.first(where: { $0["Name"] as? String == target.vmName })
     else { return .missing }
     guard vm["Running"] as? Bool == true || vm["State"] as? String == "running" else { return .stopped }
-    let ip = try? await Shell.run(tart, ["ip", target.vmName], timeout: 5)
+    let ip = try? await Shell.run(executable, ["ip", target.vmName], timeout: 5)
     let address = ip.map { String(decoding: $0.stdout, as: UTF8.self) }?.trimmingCharacters(in: .whitespacesAndNewlines)
     return .running(address: ip?.status == 0 ? address ?? "" : "")
   }
